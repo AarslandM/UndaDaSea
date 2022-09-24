@@ -19,7 +19,6 @@ func _physics_process(delta):
 	
 func set_movement_and_spawn():
 	var is_moving_left : bool = randi() % 2 == 0
-	print("Is moving left: " + str(is_moving_left))
 	var viewport = get_viewport().size
 	if is_moving_left:
 		$Sprite.flip_h = true

@@ -26,17 +26,14 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 2, 3, 3.001 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 2, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
-"args": [ true ],
-"method": "set_input"
-}, {
-"args": [ false ],
-"method": "set_input"
+"args": [  ],
+"method": "inside_inner"
 }, {
 "args": [  ],
-"method": "catch_failed"
+"method": "is_finished"
 } ]
 }
 

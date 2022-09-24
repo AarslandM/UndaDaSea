@@ -1,14 +1,15 @@
 extends Node2D
 
+signal event_failed
+
 const VERTICAL_OFFSET = 40
 
-signal catched
-signal failed
+var is_inside_inner : bool
+onready var animator = $AnimationPlayer 
 
-var is_within_inner: bool = false
-
-func _ready():
-	$AnimationPlayer.play("Shrink")
+func start():
+	show()	
+	animator.play("Shrink")
 	global_position = get_global_mouse_position()
 	global_position.y -= VERTICAL_OFFSET
 	
@@ -19,17 +20,14 @@ func _ready():
 		clamp(global_position.y, 20, viewport.y + 20)
 	)
 	
-func set_within(value):
-	is_within_inner = value
+	is_inside_inner = false
 
-func _input(event):
-	if event.is_action_pressed("interact"): 
-		if is_within_inner:
-			emit_signal("catched")
-		else:
-			emit_signal("failed")
-		queue_free()
+func is_finished():
+	emit_signal("event_failed")
 
-func catch_failed():
-	emit_signal("failed")
-	queue_free()
+func inside_inner():
+	is_inside_inner = true
+
+func interact() -> bool:
+	hide()
+	return is_inside_inner

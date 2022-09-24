@@ -1,29 +1,26 @@
 extends Area2D
 
-signal hooked
+signal hooked(fish)
 
-var can_click: bool = false
-var can_move_hook: bool = true
+var targets : Array = []
+
+var can_move : bool = true
 
 func _physics_process(_delta):
-	if can_move_hook:
+	if can_move:
 		position = get_global_mouse_position()
 
+func try_hook():
+	if targets.size() != 0:
+		if targets[0].get_overlapping_areas().find(self) != -1:
+			emit_signal("hooked", targets[0])
+			
+func fail_event():
+	pass
+		
 func _on_FishHook_area_entered(area):
-	can_click = true
-	
-func _enable_movement():
-	can_move_hook = true
+	targets.append(area)
 
 func _on_FishHook_area_exited(area):
-	can_click = false
-
-func _enable_click():
-	can_click = true
-
-func _unhandled_input(event):
-	if event.is_action_pressed("interact") and can_click:
-		can_move_hook = false
-		can_click = false
-		emit_signal("hooked")
-#		print ("Oh weee!")
+	if targets.find(area) != -1:
+		targets.remove(targets.find(area))

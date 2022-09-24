@@ -8,11 +8,25 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "Fish",
+"language": "GDScript",
+"path": "res://Fish.gd"
+} ]
+_global_script_class_icons={
+"Fish": ""
+}
+
 [application]
 
 config/name="Unda Da Sea"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://Global.gd"
 
 [global]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/32bit-swordfish.svg-6cd8e49759c679926f221bdf32ced30b.stex"
+path="res://.import/32bit-shark-swim4.svg-7bc8b2ea8ff96e9195b988f3d2650908.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/svg/32bit-swordfish.svg"
-dest_files=[ "res://.import/32bit-swordfish.svg-6cd8e49759c679926f221bdf32ced30b.stex" ]
+source_file="res://art/svg/Fish/32bit-shark-swim4.svg"
+dest_files=[ "res://.import/32bit-shark-swim4.svg-7bc8b2ea8ff96e9195b988f3d2650908.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0

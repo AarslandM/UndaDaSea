@@ -18,8 +18,12 @@ func _enable_movement():
 func _on_FishHook_area_exited(area):
 	can_click = false
 
+func _enable_click():
+	can_click = true
+
 func _unhandled_input(event):
 	if event.is_action_pressed("interact") and can_click:
 		can_move_hook = false
+		can_click = false
 		emit_signal("hooked")
 #		print ("Oh weee!")

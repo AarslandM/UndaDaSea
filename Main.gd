@@ -1,13 +1,13 @@
 extends Node2D
 
 onready var hook = $FishHook
-onready var timed_event = preload("res://TimedEvent.gd")
+onready var timed_event: PackedScene = preload("res://TimedEvent.tscn")
 
 func _ready():
 	hook.connect("hooked", self, "hook_detected")
 
 func hook_detected():
-	print ("Ai!")
+	print ("Ai! Hook detected")
 	var event_instance = timed_event.instance()
 	add_child(event_instance)
 	event_instance.connect("catched", self, "fish_got_catched")
@@ -16,7 +16,9 @@ func hook_detected():
 func fish_got_catched():
 	print("Catched fish")
 	hook.can_move_hook()
+	hook._enable_click()
 	
 func fish_got_away():
 	print("Failed to catch fish")
-	hook.can_move_hook()
+	hook._enable_movement()
+	hook._enable_click()

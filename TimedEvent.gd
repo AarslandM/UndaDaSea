@@ -1,5 +1,7 @@
 extends Node2D
 
+const VERTICAL_OFFSET = 40
+
 signal catched
 signal failed
 
@@ -7,7 +9,16 @@ var is_within_inner: bool = false
 
 func _ready():
 	$AnimationPlayer.play("Shrink")
-
+	global_position = get_global_mouse_position()
+	global_position.y -= VERTICAL_OFFSET
+	
+	var viewport = get_viewport().size
+	
+	global_position = Vector2(
+		clamp(global_position.x, 20, viewport.x - 20),
+		clamp(global_position.y, 20, viewport.y + 20)
+	)
+	
 func set_within(value):
 	is_within_inner = value
 

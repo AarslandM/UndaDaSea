@@ -5,6 +5,7 @@ onready var timed_event: PackedScene = preload("res://TimedEvent.tscn")
 
 func _ready():
 	hook.connect("hooked", self, "hook_detected")
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 func hook_detected():
 	print ("Ai! Hook detected")

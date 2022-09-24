@@ -15,7 +15,7 @@ func hook_detected():
 
 func fish_got_catched():
 	print("Catched fish")
-	hook.can_move_hook()
+	hook._enable_movement()
 	hook._enable_click()
 	
 func fish_got_away():

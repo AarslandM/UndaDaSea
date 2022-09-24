@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://art/itemsfishinga.png" type="Texture" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.0312
+
+[node name="Hook" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = -0.905826
+texture = ExtResource( 1 )
+flip_h = true
+hframes = 16
+vframes = 2
+frame = 15

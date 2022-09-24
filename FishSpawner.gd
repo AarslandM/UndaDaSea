@@ -8,7 +8,7 @@ onready var fishes : Array = [
 	preload("res://fish/Fish5.tscn"),
 	preload("res://fish/Fish6.tscn"),
 	preload("res://fish/Fish7.tscn"),
-	preload("res://fish/Fish8.tscn"),]
+	preload("res://fish/Fish8.tscn")]
 
 func _spawn_fish():
 	var index = randi() % fishes.size()

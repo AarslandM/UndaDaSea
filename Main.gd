@@ -24,6 +24,8 @@ func _unhandled_input(event):
 			emit_signal("finished_interact", successful_catch)
 			if successful_catch:
 				current_fish.queue_free()
+			else:
+				hook.fail_event()
 			current_state = STATES.Hooking
 			hook.can_move = true
 

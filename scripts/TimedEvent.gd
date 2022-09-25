@@ -9,6 +9,7 @@ onready var animator = $AnimationPlayer
 
 func start():
 	show()	
+	animator.seek(0)
 	animator.play("Shrink")
 	global_position = get_global_mouse_position()
 	global_position.y -= VERTICAL_OFFSET
@@ -30,4 +31,5 @@ func inside_inner():
 
 func interact() -> bool:
 	hide()
+	animator.stop()
 	return is_inside_inner

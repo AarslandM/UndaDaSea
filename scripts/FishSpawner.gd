@@ -1,5 +1,12 @@
 extends Node
 
+const FINAL_SPAWN_DELAY = 0.2
+const SPAWN_REDUCTION = 0.01
+
+var spawn_delay = 1.2
+
+onready var timer = $SpawnTimer
+
 onready var fishes : Array = [
 	preload("res://fish/Fish.tscn"), 
 	preload("res://fish/Fish2.tscn"),
@@ -14,3 +21,6 @@ func _spawn_fish():
 	var index = randi() % fishes.size()
 	var fish = fishes[index].instance()
 	add_child(fish)
+	if spawn_delay > FINAL_SPAWN_DELAY:
+		spawn_delay -= SPAWN_REDUCTION
+	timer.wait_time = spawn_delay

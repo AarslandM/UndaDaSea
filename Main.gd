@@ -4,8 +4,11 @@ signal finished_interact(success)
 
 enum STATES {Idle, Hooking, Interacting}
 
+const CAMERA_SHAKE_AMOUNT : float = 0.5
+
 onready var hook = $FishHook
 onready var timed_event = $TimedEvent
+onready var camera = $Camera
 
 var current_state : int = STATES.Idle
 
@@ -25,6 +28,7 @@ func _unhandled_input(event):
 			if successful_catch:
 				current_fish.queue_free()
 			else:
+				camera.add_trauma(CAMERA_SHAKE_AMOUNT)
 				hook.fail_event()
 			current_state = STATES.Hooking
 			hook.can_move = true
@@ -36,6 +40,7 @@ func _on_FishHook_hooked(fish):
 	current_fish = fish
 
 func _on_TimedEvent_event_failed():
+	camera.add_trauma(CAMERA_SHAKE_AMOUNT)
 	hook.fail_event()
 	hook.can_move = true
 	current_state = STATES.Hooking

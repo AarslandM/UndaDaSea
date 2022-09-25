@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Fish",
 "language": "GDScript",
 "path": "res://scripts/Fish.gd"
+}, {
+"base": "Camera2D",
+"class": "ShakeCamera2D",
+"language": "GDScript",
+"path": "res://scripts/ShakeCamera2D.gd"
 } ]
 _global_script_class_icons={
-"Fish": ""
+"Fish": "",
+"ShakeCamera2D": ""
 }
 
 [application]

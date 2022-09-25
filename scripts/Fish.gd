@@ -33,7 +33,6 @@ func _physics_process(delta):
 	
 	get_tree().create_timer(LIFETIME).connect("timeout", self, "queue_free")
 	
-	
 func flee():
 	randomize()
 	var flipped = randi() % 2 == 0

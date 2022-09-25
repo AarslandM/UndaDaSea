@@ -1,6 +1,7 @@
 extends Area2D
 
 signal hooked(fish)
+signal exploded(amount_of_fish)
 
 var targets : Array = []
 
@@ -22,6 +23,12 @@ func fail_event():
 	for fish in nearby_fishes:
 		if fish.has_method("flee"):
 			fish.flee()
+			
+func explode():
+	var nearby_fishes = scare_zone.get_overlapping_areas()
+	emit_signal("exploded", nearby_fishes.size())
+	for fish in nearby_fishes:
+		fish.queue_free()
 	
 func _on_FishHook_area_entered(area):
 	targets.append(area)

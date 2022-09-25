@@ -2,7 +2,6 @@ extends Area2D
 class_name Fish
 
 const SPAWN_OFFSET : int = 50
-const LIFETIME : int = 50
 
 export var speed : float = 50
 export var flee_speed : float = 200
@@ -16,6 +15,9 @@ var flee_direction : Vector2
 var is_fleeing : bool = false
 
 func _ready():
+	var visibility_notifier = VisibilityNotifier2D.new()
+	visibility_notifier.connect("screen_exited", self, "queue_free")
+	add_child(visibility_notifier)
 	set_movement_and_spawn()
 	
 func _physics_process(delta):
@@ -30,8 +32,6 @@ func _physics_process(delta):
 		clamp(position.x, -SPAWN_OFFSET * 2, viewport.x + SPAWN_OFFSET*2),
 		clamp(position.y, SPAWN_OFFSET, viewport.y - SPAWN_OFFSET)
 	)
-	
-	get_tree().create_timer(LIFETIME).connect("timeout", self, "queue_free")
 	
 func flee():
 	randomize()

@@ -36,3 +36,6 @@ func _on_FishHook_area_entered(area):
 func _on_FishHook_area_exited(area):
 	if targets.find(area) != -1:
 		targets.remove(targets.find(area))
+
+func stop():
+	set_physics_process(false)

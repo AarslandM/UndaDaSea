@@ -1,9 +1,11 @@
 extends Area2D
 class_name Fish
 
+signal escaped
+
 const SPAWN_OFFSET : int = 50
 
-export var speed : float = 50
+export var speed : float = 200
 export var flee_speed : float = 200
 export var flee_duration : float = 1
 
@@ -13,14 +15,22 @@ var velocity : Vector2
 var flee_direction : Vector2
 
 var is_fleeing : bool = false
+var can_move : bool = true
 
 func _ready():
 	var visibility_notifier = VisibilityNotifier2D.new()
-	visibility_notifier.connect("screen_exited", self, "queue_free")
+	visibility_notifier.connect("screen_exited", self, "remove_fish")
 	add_child(visibility_notifier)
 	set_movement_and_spawn()
 	
+func remove_fish():
+	if position.x < get_viewport().size.x + SPAWN_OFFSET && position.x > SPAWN_OFFSET:
+		return
+	emit_signal("escaped")
+	queue_free()
+	
 func _physics_process(delta):
+	if !can_move: return
 	velocity = movement_direction * (speed + Global.speed)
 	if is_fleeing:
 		velocity += flee_direction * flee_speed
@@ -65,3 +75,6 @@ func set_movement_and_spawn():
 		
 	global_position = spawn_position
 	
+
+func stop():
+	set_physics_process(false)

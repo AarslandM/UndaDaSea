@@ -21,6 +21,12 @@ func _spawn_fish():
 	var index = randi() % fishes.size()
 	var fish = fishes[index].instance()
 	add_child(fish)
+	fish.connect("escaped", owner, "fish_escaped")
 	if spawn_delay > FINAL_SPAWN_DELAY:
 		spawn_delay -= SPAWN_REDUCTION
 	timer.wait_time = spawn_delay
+
+func stop():
+	timer.stop()
+	for fish in get_children():
+		fish.stop()

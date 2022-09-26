@@ -81,9 +81,6 @@ func _on_TimedEvent_event_failed():
 func _on_FishHook_exploded(amount_of_fish):
 	ui.add_to_score(amount_of_fish)
 
-func _game_over():
-	pass
-
 func _on_Interface_died():
 	fish_spawner.stop()
 	hook.stop()

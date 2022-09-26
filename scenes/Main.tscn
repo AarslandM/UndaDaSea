@@ -32,3 +32,4 @@ script = ExtResource( 6 )
 [connection signal="exploded" from="FishHook" to="." method="_on_FishHook_exploded"]
 [connection signal="hooked" from="FishHook" to="." method="_on_FishHook_hooked"]
 [connection signal="event_failed" from="TimedEvent" to="." method="_on_TimedEvent_event_failed"]
+[connection signal="died" from="Camera/Interface" to="." method="_on_Interface_died"]

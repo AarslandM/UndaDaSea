@@ -11,7 +11,7 @@ onready var health_progress = $Game/Health
 onready var high_score = preload("res://high_score.tres")
 
 var cur_score : int = 0
-var cur_health : int = 50
+var cur_health : int = 20
 
 func _ready():
 	game_container.visible = true
@@ -20,6 +20,7 @@ func _ready():
 	health_progress.max_value = cur_health
 	health_progress.value = cur_health
 	bomb_progress.max_value = Global.required_fish_for_bomb
+	game_over_container.find_node("NewGameButton").connect("button_up", self, "restart_game")
 	
 func add_to_score(value):
 	cur_score += value
@@ -43,3 +44,6 @@ func remove_health():
 func save_score():
 	high_score.add_score(cur_score)
 	ResourceSaver.save("res://high_score.tres", high_score)
+
+func restart_game():
+	get_tree().reload_current_scene()

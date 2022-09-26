@@ -5,7 +5,7 @@ signal escaped
 
 const SPAWN_OFFSET : int = 50
 
-export var speed : float = 200
+export var speed : float = 50
 export var flee_speed : float = 200
 export var flee_duration : float = 1
 

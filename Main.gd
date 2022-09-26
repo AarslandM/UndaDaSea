@@ -5,19 +5,19 @@ signal finished_interact(success)
 enum STATES {Idle, Hooking, Interacting}
 
 const CAMERA_SHAKE_AMOUNT : float = 0.5
-const BOMB_SCORE_AMOUNT : int = 5
 
 onready var hook = $FishHook
 onready var timed_event = $TimedEvent
 onready var camera = $Camera
-onready var ui = $UI
+onready var ui = $Camera/Interface
 onready var fish_spawner = $FishSpawner
 
 var current_state : int = STATES.Idle
 var current_fish : Fish = null
 
-var next_bomb : int = BOMB_SCORE_AMOUNT
-var has_bomb : bool = false
+var next_bomb : int = Global.required_fish_for_bomb
+var current_bomb_progress : int = 0
+var has_bomb : bool = false # Fix bug where next bomb is getting updated even when player has bomb.
  
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
@@ -37,19 +37,24 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("explode") && has_bomb && current_state == STATES.Hooking:
 		hook.explode()
 		camera.add_trauma(CAMERA_SHAKE_AMOUNT)
+		current_bomb_progress = 0
 		has_bomb = false
+		ui.bomb_progress(current_bomb_progress)
 		ui.bomb_visible(has_bomb)
 		
 
 func catch_successful():
 	current_fish.queue_free()
-	next_bomb -= 1
 	ui.add_to_score(1)
 	current_state = STATES.Hooking
 	hook.can_move = true
-	if (next_bomb <= 0):
+	current_bomb_progress += 1
+	
+	if current_bomb_progress < next_bomb:
+		ui.bomb_progress(current_bomb_progress)
+	elif current_bomb_progress == next_bomb:
 		has_bomb = true
-		next_bomb = BOMB_SCORE_AMOUNT
+		ui.bomb_progress(current_bomb_progress)
 		ui.bomb_visible(has_bomb)
 
 func catch_failed():
@@ -77,10 +82,9 @@ func _on_FishHook_exploded(amount_of_fish):
 	ui.add_to_score(amount_of_fish)
 
 func _game_over():
-	# Pause game
+	pass
+
+func _on_Interface_died():
 	fish_spawner.stop()
 	hook.stop()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	
-	# Show game over screen
-	pass # Replace with function body.
